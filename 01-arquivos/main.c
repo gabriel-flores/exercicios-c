@@ -1,23 +1,18 @@
 #include <stdio.h>
+#include <stdio_ext.h>
 #include "user.h"
+#include "menu.h"
+#include "input.h"
 
-int main (int argc, char *argv[])
+int main ()
 {
   int user_choice;
 
   do
   {
-    printf ("[H[2J");
-    printf ("Welcome!\n\n");
-    printf ("Type one of below:\n\n");
-    printf ("l - List Users\n");
-    printf ("c - Create User\n");
-    printf ("q - Quit\n\n");
-    printf ("> ");
+    print_menu ();
 
-    user_choice = getchar ();
-    getchar (); /* eat up the like break */
-
+    user_choice = get_char ();
     switch (user_choice)
     {
       case 'c':
@@ -26,8 +21,11 @@ int main (int argc, char *argv[])
         int age;
 
         printf ("Type the user name: ");
-        scanf ("[^\n]", name);
+        __fpurge (stdin);
+        fgets (name, 50, stdin);
+
         printf ("Type the user age: ");
+        __fpurge (stdin);
         scanf ("%d", &age);
 
         create_user (name, age);
@@ -39,8 +37,14 @@ int main (int argc, char *argv[])
         list_users ();
         break;
 
+      case 'q':
+        printf ("Goodbye!\n");
+        break;
+
       default:
-        printf ("Invalid option!");
+        printf ("Invalid option!\n");
+        printf ("Press <Enter> to continue... ");
+        getchar ();
         break;
     }
   }
