@@ -4,7 +4,7 @@ CFLAGS=-Wall -Wextra -Werror -g
 01-arquivos: main.o
 	${CC} ${CFLAGS} -o 01-arquivos *.o
 
-main.o: menu.o input.o file.o user.o
+main.o: menu.o input.o file.o user.o utils.o
 	${CC} ${CFLAGS} -c main.c
 
 input.o: input.h
@@ -18,6 +18,9 @@ file.o: file.h
 
 user.o: user.h
 	${CC} ${CFLAGS} -c user.c
+
+utils.o: utils.h
+	${CC} ${CFLAGS} -c utils.c
 
 clean:
 	rm -rf 01-arquivos *.o
