@@ -1,32 +1,29 @@
 #include <stdio.h>
-#include <stdio_ext.h>
 #include "user.h"
 #include "menu.h"
 #include "input.h"
 
 int main ()
 {
-  int user_choice;
+  char user_choice[2];
 
   do
   {
     print_menu ();
 
-    user_choice = get_char ();
-    switch (user_choice)
+    get_user_input (user_choice);
+    switch (user_choice[0])
     {
       case 'c':
       {
-        char name[50];
-        int age;
+        char name[51];
+        char age[4];
 
         printf ("Type the user name: ");
-        __fpurge (stdin);
-        fgets (name, 50, stdin);
+        get_user_input (name);
 
         printf ("Type the user age: ");
-        __fpurge (stdin);
-        scanf ("%d", &age);
+        get_user_input (age);
 
         create_user (name, age);
 
@@ -48,7 +45,7 @@ int main ()
         break;
     }
   }
-  while (user_choice != 'q');
+  while (user_choice[0] != 'q');
 
   return 0;
 }
