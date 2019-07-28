@@ -1,2 +1,21 @@
-int get_char (void);
-void press_any_key_to_continue (void);
+/*
+ * A shorthand for str[strlen (str) - 1]
+ */
+char get_last_char (char *str);
+
+/*
+ * Gets an input from stdin through fgets (), clears the buffer if needed and
+ * removes the trailing new line character of `target`.
+ */
+void get_user_input (char *target);
+
+/*
+ * Clears the buffer through getchar () if needed.
+ */
+void clear_buffer (char *str);
+
+/*
+ * Asks the user to press the <Enter> key, gets the user input and clears the
+ * buffer.
+ */
+void prompt_enter_key (void);
