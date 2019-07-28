@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "input.h"
-#include "user.h"
 #include "file.h"
+#include "user.h"
+#include "utils.h"
 
 void list_users (void)
 {
@@ -19,7 +21,7 @@ void list_users (void)
 
     printf ("No entries found yet :)\n\n");
 
-    press_any_key_to_continue ();
+    prompt_enter_key ();
 
     return;
   }
@@ -34,32 +36,40 @@ void list_users (void)
     printf ("Age: %d\n", age);
   }
 
-  press_any_key_to_continue ();
+  prompt_enter_key ();
 
   close_file (file);
 }
 
-void create_user (char name[], int age)
+void create_user (char *name, char *age)
 {
   if (strlen (name) == 0)
   {
     printf ("Name must not be empty.\n");
-    press_any_key_to_continue ();
+    prompt_enter_key ();
 
     return;
   }
 
-  if (age < 0)
+  if (strlen (age) == 0)
   {
     printf ("Age must be a number greater than zero.\n");
-    press_any_key_to_continue ();
+    prompt_enter_key ();
+
+    return;
+  }
+
+  if (!is_string_numeric (age))
+  {
+    printf ("Age must be a numeric value.\n");
+    prompt_enter_key ();
 
     return;
   }
 
   FILE *file = open_file ("file.txt", "a");
 
-  fprintf (file, "%s\t%d\n", name, age);
+  fprintf (file, "%s\t%d\n", name, atoi (age));
 
   close_file (file);
 }

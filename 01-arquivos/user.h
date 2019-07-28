@@ -1,2 +1,2 @@
 void list_users (void);
-void create_user (char name[], int age);
+void create_user (char *name, char *age);
