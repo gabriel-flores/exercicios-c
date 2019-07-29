@@ -9,7 +9,7 @@
 void list_users (void)
 {
   FILE *file = open_file ("file.txt", "r");
-  char name[50];
+  char name[51];
   int age;
 
   fseek (file, 0, SEEK_END);
@@ -18,9 +18,7 @@ void list_users (void)
   if (filesize == 0)
   {
     close_file (file);
-
     printf ("No entries found yet :)\n\n");
-
     prompt_enter_key ();
 
     return;
@@ -30,7 +28,8 @@ void list_users (void)
 
   while (!feof (file))
   {
-    fscanf (file, "%s\t%d", name, &age);
+    fscanf (file, "%s\t%d\n", name, &age);
+
     printf ("-------\n");
     printf ("Name: %s\n", name);
     printf ("Age: %d\n", age);
