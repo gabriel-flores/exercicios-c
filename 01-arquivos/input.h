@@ -7,7 +7,7 @@ char get_last_char (char *str);
  * Gets an input from stdin through fgets (), clears the buffer if needed and
  * removes the trailing new line character of `target`.
  */
-void get_user_input (char *target);
+void get_user_input (char *target, unsigned int size);
 
 /*
  * Clears the buffer through getchar () if needed.

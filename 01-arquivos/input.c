@@ -7,9 +7,9 @@ char get_last_char (char *str)
   return str[strlen (str) - 1];
 }
 
-void get_user_input (char *target)
+void get_user_input (char *target, unsigned int size)
 {
-  fgets (target, sizeof (target), stdin);
+  fgets (target, sizeof (target) * size, stdin);
   clear_buffer (target);
 
   if (get_last_char (target) == '\n')

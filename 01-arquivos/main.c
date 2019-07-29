@@ -11,7 +11,7 @@ int main ()
   {
     print_menu ();
 
-    get_user_input (user_choice);
+    get_user_input (user_choice, 2);
     switch (user_choice[0])
     {
       case 'c':
@@ -20,10 +20,10 @@ int main ()
         char age[4];
 
         printf ("Type the user name: ");
-        get_user_input (name);
+        get_user_input (name, 51);
 
         printf ("Type the user age: ");
-        get_user_input (age);
+        get_user_input (age, 4);
 
         create_user (name, age);
 
