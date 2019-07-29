@@ -45,7 +45,7 @@ void create_user (char *name, char *age)
 {
   if (strlen (name) == 0)
   {
-    printf ("Name must not be empty.\n");
+    printf ("User name must not be empty.\n");
     prompt_enter_key ();
 
     return;
@@ -53,7 +53,7 @@ void create_user (char *name, char *age)
 
   if (strlen (age) == 0)
   {
-    printf ("Age must be a number greater than zero.\n");
+    printf ("User age must not be empty.\n");
     prompt_enter_key ();
 
     return;
@@ -61,7 +61,7 @@ void create_user (char *name, char *age)
 
   if (!is_string_numeric (age))
   {
-    printf ("Age must be a numeric value.\n");
+    printf ("User age must be a numeric value.\n");
     prompt_enter_key ();
 
     return;
