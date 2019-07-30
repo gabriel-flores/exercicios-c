@@ -1,26 +1,28 @@
+PROGAM_NAME=01-arquivos
+
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror -g
 
-01-arquivos: main.o
-	${CC} ${CFLAGS} -o 01-arquivos *.o
+$(PROGAM_NAME): main.o utils.o file.o menu.o input.o user.o
+	$(CC) -o $(PROGAM_NAME) main.o utils.o file.o menu.o input.o user.o
 
-main.o: menu.o input.o file.o user.o utils.o
-	${CC} ${CFLAGS} -c main.c
+main.o: main.c
+	$(CC) $(CFLAGS) -c main.c
 
-input.o: input.h
-	${CC} ${CFLAGS} -c input.c
+input.o: input.c input.h
+	$(CC) $(CFLAGS) -c input.c
 
-menu.o: menu.h
-	${CC} ${CFLAGS} -c menu.c
+menu.o: menu.c menu.h
+	$(CC) $(CFLAGS) -c menu.c
 
-file.o: file.h
-	${CC} ${CFLAGS} -c file.c
+file.o: file.c file.h
+	$(CC) $(CFLAGS) -c file.c
 
-user.o: user.h
-	${CC} ${CFLAGS} -c user.c
+user.o: user.c user.h
+	$(CC) $(CFLAGS) -c user.c
 
-utils.o: utils.h
-	${CC} ${CFLAGS} -c utils.c
+utils.o: utils.c utils.h
+	$(CC) $(CFLAGS) -c utils.c
 
 clean:
-	rm -rf 01-arquivos *.o
+	rm -rf $(PROGAM_NAME) *.o
