@@ -1,10 +1,10 @@
-PROGAM_NAME=01-arquivos
+PROGRAM_NAME=01-arquivos
 
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror -g
 
-$(PROGAM_NAME): main.o utils.o file.o menu.o input.o user.o
-	$(CC) -o $(PROGAM_NAME) main.o utils.o file.o menu.o input.o user.o
+$(PROGRAM_NAME): main.o utils.o file.o menu.o input.o user.o
+	$(CC) -o $(PROGRAM_NAME) main.o utils.o file.o menu.o input.o user.o
 
 main.o: main.c
 	$(CC) $(CFLAGS) -c main.c
@@ -25,4 +25,4 @@ utils.o: utils.c utils.h
 	$(CC) $(CFLAGS) -c utils.c
 
 clean:
-	rm -rf $(PROGAM_NAME) *.o
+	rm -rf $(PROGRAM_NAME) *.o
