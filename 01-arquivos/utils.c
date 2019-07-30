@@ -1,15 +1,33 @@
+#include <ctype.h>
 #include <string.h>
 
-int is_char_numeric (char c)
+int is_string_empty (char *string)
 {
-  return c >= 48 && c <= 57;
+  return (int) strlen (string) == 0;
 }
 
 int is_string_numeric (char *string)
 {
-  for (int i = 0; i < (int) strlen (string); i++)
+  int length = (int) strlen (string);
+
+  for (int i = 0; i < length; i++)
   {
-    if (!is_char_numeric (string[i]))
+    if (!isdigit (string[i]))
+      return 0;
+  }
+
+  return 1;
+}
+
+int is_string_textual (char *string)
+{
+  int length = (int) strlen (string);
+
+  for (int i = 0; i < length; i++)
+  {
+    char current_char = string[i];
+
+    if (!isalpha (current_char) && !isblank (current_char))
       return 0;
   }
 
