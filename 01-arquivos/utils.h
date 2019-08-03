@@ -1,3 +1,6 @@
+#ifndef __UTILS_H__
+#define __UTILS_H__
+
 /*
  * Shorthand for `strlen (string) == 0`.
  */
@@ -12,3 +15,5 @@ int is_string_numeric (char *string);
  * Checks whether the string contains only a-z, A-Z characters and spaces.
  */
 int is_string_textual (char *string);
+
+#endif /* __UTILS_H__ */

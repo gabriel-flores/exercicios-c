@@ -1,3 +1,6 @@
+#ifndef __INPUT_H__
+#define __INPUT_H__
+
 /*
  * A shorthand for str[strlen (str) - 1]
  */
@@ -19,3 +22,5 @@ void clear_buffer (char *str);
  * buffer.
  */
 void prompt_enter_key (void);
+
+#endif /* __INPUT_H__ */
