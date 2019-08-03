@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "user.h"
 #include "menu.h"
 #include "input.h"
@@ -16,16 +17,13 @@ int main ()
     {
       case 'c':
       {
-        char name[51];
-        char age[4];
+        char *name = malloc (sizeof (char) * 51);
+        char *age = malloc (sizeof (char) * 3);
 
-        printf ("Type the user name: ");
-        get_user_input (name, 51);
+        get_input_user_property ("name", name, 51);
+        get_input_user_property ("age", age, 3);
 
-        printf ("Type the user age: ");
-        get_user_input (age, 4);
-
-        create_user (name, age);
+        save_user (name, age);
 
         break;
       }
@@ -40,8 +38,7 @@ int main ()
 
       default:
         printf ("Invalid option!\n");
-        printf ("Press <Enter> to continue... ");
-        getchar ();
+        prompt_enter_key ();
         break;
     }
   }

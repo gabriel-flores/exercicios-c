@@ -8,6 +8,41 @@
 
 #define DATABASE_FILE_NAME "database.txt"
 
+void get_input_user_property (char *property_name,
+                              char *property_value,
+                              unsigned int size)
+{
+  char *error_message;
+
+  do
+  {
+    printf ("Type the user %s: ", property_name);
+    get_user_input (property_value, size);
+
+    error_message = is_user_property_valid (property_name, property_value);
+
+    if (error_message)
+      printf ("%s\n\n", error_message);
+
+  } while (error_message != NULL);
+}
+
+char * is_user_property_valid (char *property_name, char *property_value)
+{
+  if (is_string_empty (property_value))
+    return "Please provide a value.";
+
+  if (strcmp (property_name, "name") == 0 &&
+      !is_string_textual (property_value))
+    return "Please provide only alphabetical characters and spaces.";
+
+  if (strcmp (property_name, "age") == 0 &&
+      !is_string_numeric (property_value))
+    return "Please provide a numeric value.";
+
+  return NULL;
+}
+
 void list_users (void)
 {
   FILE *file = open_file (DATABASE_FILE_NAME, "r");
@@ -20,7 +55,7 @@ void list_users (void)
   if (filesize == 0)
   {
     close_file (file);
-    printf ("No entries found yet :)\n\n");
+    printf ("No users found in database.\n\n");
     prompt_enter_key ();
 
     return;
@@ -43,24 +78,8 @@ void list_users (void)
   close_file (file);
 }
 
-void create_user (char *name, char *age)
+void save_user (char *name, char *age)
 {
-  char *error_message = is_user_name_valid (name);
-  if (error_message)
-  {
-    printf ("%s\n\n", error_message);
-    prompt_enter_key ();
-    return;
-  }
-
-  error_message = is_user_age_valid (age);
-  if (error_message)
-  {
-    printf ("%s\n\n", error_message);
-    prompt_enter_key ();
-    return;
-  }
-
   FILE *file = open_file (DATABASE_FILE_NAME, "a");
 
   fprintf (file, "%s\t%d\n", name, atoi (age));
@@ -69,26 +88,4 @@ void create_user (char *name, char *age)
 
   printf ("User %s saved successfuly!\n\n", name);
   prompt_enter_key ();
-}
-
-char * is_user_name_valid (char *name)
-{
-  if (is_string_empty (name))
-    return "User name must not be empty.";
-
-  if (!is_string_textual (name))
-    return "User name must contain only alphabetical characters and spaces.";
-
-  return NULL;
-}
-
-char * is_user_age_valid (char *age)
-{
-  if (is_string_empty (age))
-    return "User age must not be empty.";
-
-  if (!is_string_numeric (age))
-    return "User age must be a numeric value.";
-
-  return NULL;
 }
